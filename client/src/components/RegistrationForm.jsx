@@ -4,36 +4,83 @@ import { withFormik} from "formik";
 import { StyledForm, StyledField, ErrorP } from '../StyledComps'
 import * as Yup from "yup";
 
-function RegistrationForm({values, errors, touched, status, setUsers})
-{
-    useEffect(_ =>
-    {
-        console.log("inf loop?")
-        if(status)
-        {
-            console.log("inf loop 2?")
-            axios.get("http://localhost:5000/api/restricted/data")
-            .then(response =>
-                {
-                    console.log("response", response)
-                    setUsers(users => [...users, response.data])
-                })
-        }
-    }, [status, setUsers])
+// function RegistrationForm({values, errors, touched, status, setUsers})
+// {
+//     useEffect(_ =>
+//     {
+//         console.log("inf loop?")
+//         if(status)
+//         {
+//             console.log("inf loop 2?")
+//             axios.get("http://localhost:5000/api/restricted/data")
+//             .then(response =>
+//                 {
+//                     console.log("response", response)
+//                     setUsers(users => [...users, response.data])
+//                 })
+//         }
+//     }, [status, setUsers])
 
-    return (
-        <StyledForm>
-            <div>
-                <StyledField type="text" name="username" placeholder="Username" data-testid="usernameInput"/>
-                {touched.username && errors.username && <ErrorP>{errors.username}</ErrorP>}
-            </div>
-            <div>
-                <StyledField type="password" name="password" placeholder="Password" />
-                {touched.password && errors.password && <ErrorP>{errors.password}</ErrorP>}
-            </div>
-            <button type="submit" data-testid="submitBtn">Submit!</button>
-        </StyledForm>
-    )
+//     return (
+//         <StyledForm>
+//             <div>
+//                 <StyledField type="text" name="username" placeholder="Username" data-testid="usernameInput"/>
+//                 {touched.username && errors.username && <ErrorP>{errors.username}</ErrorP>}
+//             </div>
+//             <div>
+//                 <StyledField type="password" name="password" placeholder="Password" />
+//                 {touched.password && errors.password && <ErrorP>{errors.password}</ErrorP>}
+//             </div>
+//             <button type="submit" data-testid="submitBtn">Submit!</button>
+//         </StyledForm>
+//     )
+// }
+
+class RegistrationForm extends React.Component
+{
+    // useEffect(_ =>
+    // {
+    //     console.log("inf loop?")
+    //     if(status)
+    //     {
+    //         console.log("inf loop 2?")
+    //         axios.get("http://localhost:5000/api/restricted/data")
+    //         .then(response =>
+    //             {
+    //                 console.log("response", response)
+    //                 setUsers(users => [...users, response.data])
+    //             })
+    //     }
+    // }, [status, setUsers])
+
+    constructor(props)
+    {
+        super(props)
+        this.state = 
+        {
+            values: props.values,
+            touched: props.touched,
+            errors: props.errors,
+            status: props.status,
+            setUsers: props.setUsers
+        }
+    }
+    render()
+    {
+        return (
+            <StyledForm>
+                <div>
+                    <StyledField type="text" name="username" placeholder="Username" data-testid="usernameInput"/>
+                    {this.state.touched.username && this.state.errors.username && <ErrorP>{this.state.errors.username}</ErrorP>}
+                </div>
+                <div>
+                    <StyledField type="password" name="password" placeholder="Password" />
+                    {this.state.touched.password && this.state.errors.password && <ErrorP>{this.state.errors.password}</ErrorP>}
+                </div>
+                <button type="submit" data-testid="submitBtn">Submit!</button>
+            </StyledForm>
+        )
+    }
 }
 
 const FormikRegistrationForm = withFormik({
