@@ -38,32 +38,18 @@ import * as Yup from "yup";
 
 class RegistrationForm extends React.Component
 {
-    // useEffect(_ =>
-    // {
-    //     console.log("inf loop?")
-    //     if(status)
-    //     {
-    //         console.log("inf loop 2?")
-    //         axios.get("http://localhost:5000/api/restricted/data")
-    //         .then(response =>
-    //             {
-    //                 console.log("response", response)
-    //                 setUsers(users => [...users, response.data])
-    //             })
-    //     }
-    // }, [status, setUsers])
-
+    
     constructor(props)
     {
         super(props)
-        this.state = 
-        {
-            values: props.values,
-            touched: props.touched,
-            errors: props.errors,
-            status: props.status,
-            setUsers: props.setUsers
-        }
+        // this.state = 
+        // {
+        //     values: props.values,
+        //     touched: props.touched,
+        //     errors: props.errors,
+        //     status: props.status,
+        //     setUsers: props.setUsers
+        // }
     }
     render()
     {
@@ -71,11 +57,11 @@ class RegistrationForm extends React.Component
             <StyledForm>
                 <div>
                     <StyledField type="text" name="username" placeholder="Username" data-testid="usernameInput"/>
-                    {this.state.touched.username && this.state.errors.username && <ErrorP>{this.state.errors.username}</ErrorP>}
+                    {this.props.touched.username && this.props.errors.username && <ErrorP>{this.props.errors.username}</ErrorP>}
                 </div>
                 <div>
                     <StyledField type="password" name="password" placeholder="Password" />
-                    {this.state.touched.password && this.state.errors.password && <ErrorP>{this.state.errors.password}</ErrorP>}
+                    {this.props.touched.password && this.props.errors.password && <ErrorP>{this.props.errors.password}</ErrorP>}
                 </div>
                 <button type="submit" data-testid="submitBtn">Submit!</button>
             </StyledForm>
