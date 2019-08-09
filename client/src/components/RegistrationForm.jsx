@@ -24,14 +24,14 @@ function RegistrationForm({values, errors, touched, status, setUsers})
     return (
         <StyledForm>
             <div>
-                <StyledField type="text" name="username" placeholder="Username" />
+                <StyledField type="text" name="username" placeholder="Username" data-testid="usernameInput"/>
                 {touched.username && errors.username && <ErrorP>{errors.username}</ErrorP>}
             </div>
             <div>
                 <StyledField type="password" name="password" placeholder="Password" />
                 {touched.password && errors.password && <ErrorP>{errors.password}</ErrorP>}
             </div>
-            <button type="submit">Submit!</button>
+            <button type="submit" data-testid="submitBtn">Submit!</button>
         </StyledForm>
     )
 }
