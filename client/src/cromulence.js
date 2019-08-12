@@ -1,0 +1,1 @@
+export const cromulent = str => str.toLowerCase() === "embiggens" ? "perfectly cromulent" : "non-cromulent"
